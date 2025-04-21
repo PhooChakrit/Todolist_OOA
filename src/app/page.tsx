@@ -180,10 +180,58 @@ export default function Home() {
               </p>
             </div>
             <div className="flex items-center gap-6">
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <BellIcon className="h-6 w-6 text-gray-600" />
-                <span className="sr-only">Notifications</span>
-              </Button>
+                <Dialog>
+                <DialogTrigger asChild>
+                  <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative rounded-full border-1 border-gray-200"
+                  >
+                  <BellIcon className="h-6 w-6 text-gray-600" />
+                  {todos.some((todo) => !todo.completed) && (
+                    <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full" />
+                  )}
+                  <span className="sr-only">Notifications</span>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                  <DialogTitle className="text-gray-900">
+                    Task Notifications
+                  </DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                  {todos.length > 0 ? (
+                    todos.map((todo) => (
+                    <div
+                      key={todo.id}
+                      className="flex items-center p-4 border border-gray-200 rounded-xl bg-gray-50"
+                    >
+                      <div className="flex-1">
+                      <p
+                        className={`text-gray-900 text-lg ${
+                        todo.completed ? "line-through text-gray-400" : ""
+                        }`}
+                      >
+                        {todo.title}
+                      </p>
+                      {todo.dueDate && (
+                        <div className="flex items-center mt-2">
+                        <CalendarIcon className="w-4 h-4 text-emerald-500 mr-2" />
+                        <span className="text-sm text-emerald-600">
+                          Due {todo.dueDate.toLocaleDateString()}
+                        </span>
+                        </div>
+                      )}
+                      </div>
+                    </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-500">No notifications available.</p>
+                  )}
+                  </div>
+                </DialogContent>
+                </Dialog>
 
               <Dialog>
                 <DialogTrigger asChild>

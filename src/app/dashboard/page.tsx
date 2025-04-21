@@ -26,7 +26,7 @@ export default function Dashboard() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
           {/* Header */}
-          <header className="h-20 flex items-center justify-between px-8 bg-white border-b border-gray-200">
+          <header className="h-20 flex items-center justify-between p-8 bg-white border-b border-gray-200">
             <div>
               <h1 className="text-2xl font-bold text-gray-900">
                 March 2024 Summary
