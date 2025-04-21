@@ -49,6 +49,10 @@ export async function GET(req) {
             return NextResponse.json({ error: 'Failed to fetch Google user info' }, { status: 400 });
         }
 
+        
+        console.log("Google user info:", googleUserInfo);
+        
+
         const User = {
             id: googleUserInfo.sub || '', // Google user ID
             email: googleUserInfo.email || '',
