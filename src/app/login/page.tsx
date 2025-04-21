@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { GoogleLogo } from '@/components/svgs'; // Create this SVG component
-
+import { signIn } from "next-auth/react";
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
@@ -61,12 +61,11 @@ export default function LoginPage() {
           <Button 
             variant="outline" 
             className="w-full flex gap-3 items-center py-5 border-gray-300 hover:bg-gray-50"
-            // onClick={handleGoogleAuth}
+            onClick={() => signIn("google", { callbackUrl: "/" })}
           >
             <GoogleLogo className="w-5 h-5" />
             <span>Continue with Google</span>
           </Button>
-
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
