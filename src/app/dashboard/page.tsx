@@ -86,7 +86,10 @@ export default function Dashboard() {
   const upcomingTasks = getUpcomingTasks();
 
   // Calculate productivity trend (mock for now)
-  const productivityTrend = 15.3;
+  const productivityTrend = todos.length > 0
+    ? Math.round(((stats.completed - stats.pending) / todos.length) * 100)
+    : 0;
+
 
   const getTasksByDate = () => {
     const tasksByDate: Record<string, { total: number, completed: number }> = {};
