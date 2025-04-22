@@ -19,5 +19,7 @@ model Todoitem {
   title String 
   data String
   status String
+  dueDate DateTime?
+  completed Boolean
   user User @relation(fields: [userEmail], references: [email], name: "UserEmails")
 }

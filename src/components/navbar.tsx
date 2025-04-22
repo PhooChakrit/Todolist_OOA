@@ -5,11 +5,11 @@ import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-export default function Navbar() {
+export default function Navbar(user: { user: any }) {
   const router = useRouter();
   const pathname = usePathname();
   const [activeItem, setActiveItem] = useState("");
-
+  let userData = user.user;
   const navItems = [
     { name: "Home", icon: HomeIcon, path: "/" },
     { name: "Dashboard", icon: ChartBarIcon, path: "/dashboard" },
@@ -26,6 +26,7 @@ export default function Navbar() {
     router.push(path);
     setActiveItem(name);
   };
+  // console.log("navbar",user.user);
 
   return (
     <aside className="h-screen flex flex-col">
@@ -35,7 +36,9 @@ export default function Navbar() {
           <UserCircleIcon className="h-8 text-gray-700 w-8" />
         </div>
         <div>
-          <h2 className="font-bold text-gray-900">Chakrit Tokavan</h2>
+            {userData?.name && (
+            <h2 className="font-bold text-gray-900">{userData.name}</h2>
+            )}
         </div>
       </div>
 
