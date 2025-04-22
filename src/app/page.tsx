@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import axios from 'axios';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -86,6 +87,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [editingTodo, setEditingTodo] = useState<TodoItem | null>(null);
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   // Add state for viewing todo details
   const [viewingTodo, setViewingTodo] = useState<TodoItem | null>(null);
@@ -133,9 +135,14 @@ export default function Home() {
       try {
         setLoading(true);
         const response = await axios.get('/api/profile');
-        setUser(response.data);
+        if (!response.data) {
+          window.location.href = '/login'; // Redirect to login page if no user data
+        } else {
+          setUser(response.data);
+        }
       } catch (err) {
         console.error('Failed to fetch user data:', err);
+        window.location.href = '/login'; // Redirect to login page on error
       } finally {
         setLoading(false);
       }
@@ -224,6 +231,7 @@ export default function Home() {
         },
       ]);
       form.reset();
+      setIsCreateDialogOpen(false);
     } catch (error) {
       console.error("Error creating task:", error);
     }
@@ -422,7 +430,7 @@ export default function Home() {
                 </DialogContent>
               </Dialog>
 
-              <Dialog>
+                <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
                 <DialogTrigger asChild>
                   <Button className="gap-2 bg-emerald-600 hover:bg-emerald-700 text-white">
                     <PlusIcon className="h-5 w-5" />
@@ -533,6 +541,7 @@ export default function Home() {
                         <Button
                           type="submit"
                           className="bg-emerald-600 hover:bg-emerald-700"
+                          onClick={() => DialogClose}
                         >
                           Create Task
                         </Button>

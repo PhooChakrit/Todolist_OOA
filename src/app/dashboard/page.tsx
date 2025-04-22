@@ -87,7 +87,7 @@ export default function Dashboard() {
 
   // Calculate productivity trend (mock for now)
   const productivityTrend = todos.length > 0
-    ? Math.round(((stats.completed - stats.pending) / todos.length) * 100)
+    ? Math.round(((stats.completed - stats.overdue) / todos.length) * 100)
     : 0;
 
 
