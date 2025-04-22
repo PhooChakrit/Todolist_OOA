@@ -168,24 +168,24 @@ export default function Home() {
     setMounted(true);
     // Initialize todos after mount
     setTodos([
-      {
-        id: 1,
-        title: "Complete project proposal",
-        completed: false,
-        dueDate: new Date("2024-03-25"),
-      },
-      {
-        id: 2,
-        title: "Review technical documentation",
-        completed: true,
-        dueDate: new Date("2024-03-22"),
-      },
-      {
-        id: 3,
-        title: "Prepare presentation slides",
-        completed: false,
-        dueDate: new Date("2024-03-24"),
-      },
+      // {
+      //   id: 1,
+      //   title: "Complete project proposal",
+      //   completed: false,
+      //   dueDate: new Date("2024-03-25"),
+      // },
+      // {
+      //   id: 2,
+      //   title: "Review technical documentation",
+      //   completed: true,
+      //   dueDate: new Date("2024-03-22"),
+      // },
+      // {
+      //   id: 3,
+      //   title: "Prepare presentation slides",
+      //   completed: false,
+      //   dueDate: new Date("2024-03-24"),
+      // },
     ]);
   }, []);
 
