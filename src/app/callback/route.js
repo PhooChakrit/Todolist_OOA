@@ -109,6 +109,7 @@ export async function GET(req) {
       const response = NextResponse.redirect(redirectUrl);
       
       // ตั้งค่า cookies
+      
       response.cookies.set('token', accessToken, {
         httpOnly: true,
         path: '/',
@@ -118,6 +119,8 @@ export async function GET(req) {
       });
       
       console.log(`User ${User.id} logged in successfully`);
+      console.log(`cookie set with token: ${accessToken}`);
+      
       return response;
     } catch (jwtError) {
       console.error("JWT creation error:", jwtError);
