@@ -553,122 +553,122 @@ export default function Home() {
             </div>
           </header>
 
-          <div className="flex-1 grid grid-cols-3 gap-8 p-8">
-            <div className="col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+            <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-8 p-8">
+            <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
               <div className="space-y-4">
-                {todos.map((todo) => (
-                  <div
-                    key={todo.id}
-                    className="flex items-center p-4 border border-gray-200 rounded-xl hover:shadow-lg transition-all group bg-white cursor-pointer"
-                    onClick={() => openViewDialog(todo)}
-                  >
-                    <Checkbox
-                      checked={todo.completed}
-                      onClick={(e) => e.stopPropagation()} // ป้องกันการเปิด dialog
-                      onCheckedChange={() => toggleTodo(todo.id)} // ทำงานเปลี่ยนสถานะ
-                      className="h-6 w-6 rounded-lg data-[state=checked]:bg-emerald-500"
-                    />
+              {todos.map((todo) => (
+                <div
+                key={todo.id}
+                className="flex items-center p-4 border border-gray-200 rounded-xl hover:shadow-lg transition-all group bg-white cursor-pointer"
+                onClick={() => openViewDialog(todo)}
+                >
+                <Checkbox
+                  checked={todo.completed}
+                  onClick={(e) => e.stopPropagation()} // Prevent opening dialog
+                  onCheckedChange={() => toggleTodo(todo.id)} // Toggle status
+                  className="h-6 w-6 rounded-lg data-[state=checked]:bg-emerald-500"
+                />
 
-                    <div className="ml-4 flex-1">
-                      <p
-                        className={`text-gray-900 text-lg ${todo.completed ? "line-through text-gray-400" : ""
-                          }`}
-                      >
-                        {todo.title}
-                      </p>
-                      {todo.dueDate && (
-                        <div className="flex items-center mt-2">
-                          <CalendarIcon className="w-4 h-4 text-emerald-500 mr-2" />
-                          <span className="text-sm text-emerald-600">
-                            Due {new Date(todo.dueDate).toLocaleDateString()}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-gray-400 hover:text-emerald-500"
-                        onClick={(e) => {
-                          e.stopPropagation(); // Prevent opening view dialog
-                          openEditDialog(todo);
-                        }}
-                      >
-                        <PencilIcon className="h-5 w-5" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="text-gray-400 hover:text-red-500"
-                        onClick={(e) => {
-                          e.stopPropagation(); // Prevent opening view dialog
-                          deleteTodo(todo.id);
-                        }}
-                      >
-                        <TrashIcon className="h-5 w-5" />
-                      </Button>
-                    </div>
+                <div className="ml-4 flex-1">
+                  <p
+                  className={`text-gray-900 text-lg ${todo.completed ? "line-through text-gray-400" : ""
+                    }`}
+                  >
+                  {todo.title}
+                  </p>
+                  {todo.dueDate && (
+                  <div className="flex items-center mt-2">
+                    <CalendarIcon className="w-4 h-4 text-emerald-500 mr-2" />
+                    <span className="text-sm text-emerald-600">
+                    Due {new Date(todo.dueDate).toLocaleDateString()}
+                    </span>
                   </div>
-                ))}
+                  )}
+                </div>
+                <div className="flex">
+                  <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-gray-400 hover:text-emerald-500"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent opening view dialog
+                    openEditDialog(todo);
+                  }}
+                  >
+                  <PencilIcon className="h-5 w-5" />
+                  </Button>
+                  <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-gray-400 hover:text-red-500"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent opening view dialog
+                    deleteTodo(todo.id);
+                  }}
+                  >
+                  <TrashIcon className="h-5 w-5" />
+                  </Button>
+                </div>
+                </div>
+              ))}
               </div>
             </div>
 
             <div className="space-y-8">
               <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-bold text-lg text-gray-900">
-                    Calendar Events
-                  </h3>
-                  <Button
-                    variant="ghost"
-                    className="text-emerald-600 hover:text-emerald-700 gap-2"
-                  >
-                    <ArrowPathIcon className="h-4 w-4" />
-                    Sync
-                  </Button>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="font-bold text-lg text-gray-900">
+                Calendar Events
+                </h3>
+                <Button
+                variant="ghost"
+                className="text-emerald-600 hover:text-emerald-700 gap-2"
+                >
+                <ArrowPathIcon className="h-4 w-4" />
+                Sync
+                </Button>
+              </div>
+              <div className="space-y-4">
+                {events.map((event) => (
+                <div
+                  key={event.id}
+                  className="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200"
+                >
+                  <div className="w-16 text-emerald-600 font-medium">
+                  {event.time}
+                  </div>
+                  <div className="flex-1 text-gray-700 font-medium">
+                  {event.title}
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  {events.map((event) => (
-                    <div
-                      key={event.id}
-                      className="flex items-center p-3 bg-gray-50 rounded-lg border border-gray-200"
-                    >
-                      <div className="w-16 text-emerald-600 font-medium">
-                        {event.time}
-                      </div>
-                      <div className="flex-1 text-gray-700 font-medium">
-                        {event.title}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                ))}
+              </div>
               </div>
 
               <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <h3 className="font-bold text-lg text-gray-900 mb-6">
-                  Profile
-                </h3>
-                <div className="flex items-center gap-4">
-                  <div className="p-2 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-full">
-                    <UserCircleIcon className="h-12 w-12 text-emerald-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900">{user?.name}</h4>
-                    <p className="text-emerald-600 text-sm">
-                      {user?.email}
-                    </p>
-                    <Button
-                      variant="link"
-                      className="text-emerald-600 hover:text-emerald-700 p-0 h-auto"
-                    >
-                      View Profile →
-                    </Button>
-                  </div>
+              <h3 className="font-bold text-lg text-gray-900 mb-6">
+                Profile
+              </h3>
+              <div className="flex items-center gap-4">
+                <div className="p-2 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-full">
+                <UserCircleIcon className="h-12 w-12 text-emerald-600" />
+                </div>
+                <div>
+                <h4 className="font-bold text-gray-900">{user?.name}</h4>
+                <p className="text-emerald-600 text-sm">
+                  {user?.email}
+                </p>
+                <Button
+                  variant="link"
+                  className="text-emerald-600 hover:text-emerald-700 p-0 h-auto"
+                >
+                  View Profile →
+                </Button>
                 </div>
               </div>
+              </div>
             </div>
-          </div>
+            </div>
         </div>
       </div>
 
